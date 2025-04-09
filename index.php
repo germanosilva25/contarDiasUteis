@@ -26,6 +26,9 @@
 </html>
 
 <?php
+
+if(!$_POST)
+    return;
 $array = explode("/", $_POST['data']);
 $dataIncicio = $_POST['data'];
 //echo "data post: ",$dataIncicio;
@@ -33,7 +36,8 @@ if($_POST){
     $mes = intval(date('m', strtotime($_POST['data'])));
     
     $contaFeriados = new utilDates();
-    echo "O mês de: " .$contaFeriados::mesesReferencia()[$mes]. " tem " .$contaFeriados::getDiasUteisMes($_POST['data'], $dataFim = ''). " dias uteis, a partir da data informada!";
+
+    echo "O mês de: " .$contaFeriados::mesesReferencia()[$mes-1]. " tem " .$contaFeriados::getDiasUteisMes($_POST['data'], $dataFim = ''). " dias uteis, a partir da data informada!";
 }
 class utilDates
 {
@@ -99,7 +103,7 @@ class utilDates
         return self::$qnt;
     }
     
-    public function mesesReferencia()
+    public static function mesesReferencia()
     {
         return array(
             'Janeiro',
